@@ -1,8 +1,18 @@
 .para{
     display: inline-block;
-    font-size: 70px;
+    font-size: 20px;
     font-family: fantasy;
 }
 body{
-    background-color: brown;
+    background-color: #fafaf3;
+}
+.blockquote{
+    border-left: 5px solid lightgray;
+    padding-left: 35px;
+}
+.margin-top{
+    margin-top: 45px;
+}
+.sidebar{
+    
 }

@@ -1,9 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Hello World</h1>
+<div class="container margin-top">
     {% for post in posts %}
-        <h1>{{ post.title }}</h1>
-        <p>by {{ post.author }} on {{ post.date }}</p>
-        <p>{{ post.content }}</p>
+    <blockquote class="blockquote">
+        <header>{{ post.title }}</header>
+        <p class="mb-0">by {{ post.author }} on {{ post.date }}</p>
+        <footer class="blockquote-footer">{{ post.content }}</footer>
+    </blockquote>
     {% endfor %}
+</div>
 {% endblock %}
