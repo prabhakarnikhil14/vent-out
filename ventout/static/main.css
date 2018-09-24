@@ -1,0 +1,36 @@
+.para{
+    display: inline-block;
+    font-size: 20px;
+    font-family: fantasy;
+}
+body{
+    background-color: #fafaf3;
+}
+.blockquote{
+    border-left: 5px solid lightgray;
+    padding-left: 35px;
+}
+.margin-top{
+    margin-top: 45px;
+}
+.sidebar{
+    height: 300px;
+    width: 200px;
+    position: absolute;
+    top: 110px;
+    right: 300px;
+    background-color: blanchedalmond;
+    padding: 30px;
+    line-height: 1.6;
+}
+.create-post button{
+    width: 100%;
+    background-color: #fafaf3;
+    padding: 10px 5px;
+    border: none;   
+}
+.my-forms{
+    width: 50%;
+    margin-top: 45px;
+    margin-left: 15%;
+}
