@@ -3,9 +3,11 @@
 <div class="container margin-top">
     {% for post in posts %}
     <blockquote class="blockquote">
-        <header>{{ post.title }}</header>
-        <p class="mb-0">by {{ post.author }} on {{ post.date }}</p>
-        <footer class="blockquote-footer">{{ post.content }}</footer>
+        <img class="rounded-circle post-image" src="{{ url_for('static', filename='profile_pics/'+post.author.image_file) }}">
+        <header class="post-title">{{ post.title }}</header><small class="text-muted small">{{
+            post.date_posted.strftime('%Y-%m-%d') }}</small>
+        <p class="default-background mb-0 post-content" style="padding: 0 5px 0 5px">{{ post.content }}</p>
+        <footer class="blockquote-footer">by {{ post.author.username }}</footer>
     </blockquote>
     {% endfor %}
 </div>

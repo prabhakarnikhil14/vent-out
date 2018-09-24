@@ -1,36 +1,76 @@
-.para{
+.para {
     display: inline-block;
     font-size: 20px;
     font-family: fantasy;
 }
-body{
-    background-color: #fafaf3;
-}
-.blockquote{
-    border-left: 5px solid lightgray;
+
+.blockquote {
+    border-left: 5px solid gray;
     padding-left: 35px;
+    background-color: blanchedalmond;
+    color: black;
+    padding: 10px;
 }
-.margin-top{
-    margin-top: 45px;
+
+.margin-top {
+    margin-top: 35px;
 }
-.sidebar{
-    height: 300px;
-    width: 200px;
-    position: absolute;
-    top: 110px;
-    right: 300px;
+
+.col-md-3 {
+    margin-top: 35px;
+    height: 250px;
     background-color: blanchedalmond;
     padding: 30px;
     line-height: 1.6;
 }
-.create-post button{
+
+.content-section button {
     width: 100%;
-    background-color: #fafaf3;
     padding: 10px 5px;
-    border: none;   
+    background-color: #343a40;
+    color: white;   
+    border: none;
 }
-.my-forms{
+
+.my-forms {
     width: 50%;
     margin-top: 45px;
     margin-left: 15%;
+}
+
+.account-img {
+    width: 100px;
+    height: 100px;
+    margin: 0px 20px;
+}
+.post-image{
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 0px 20px 0px 0px;
+}
+.media {
+    background-color: white;
+    border: 2px solid lightgray;
+    padding: 10px;
+}
+
+.default-background {
+    background-color: #fafaf3;
+}
+
+.blockquote-footer {
+    text-align: right;
+}
+
+.small {
+    font-size: 14px;
+}
+
+.post-title{
+    font-size: 25px;
+}
+
+.post-content{
+    font-size: 20px;
 }
