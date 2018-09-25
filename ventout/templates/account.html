@@ -8,5 +8,24 @@
             <p class="text-secondary">{{ current_user.email }}</p>
         </div>
     </div>
+    <div class="margin-top">
+        {% for post in posts %}
+        <blockquote class="blockquote">
+            <img class="rounded-circle post-image" src="{{ url_for('static', filename='profile_pics/'+post.author.image_file) }}">
+            <header class="post-title">{{ post.title }}</header>
+            <small style="display:inline-block" class="text-muted small">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            {% if post.author == current_user %}
+            <div class="update-delete-btn">
+                <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                <form style="display:inline-block" method="POST" id="delete-post" action="{{ url_for('delete_post', post_id=post.id) }}">
+                    <button type="submit" class="btn btn-danger btn-sm m-1">Delete</button>
+                </form>
+            </div>
+            {% endif %}
+            <p class="default-background mb-0 post-content" style="padding: 0 5px 0 5px">{{ post.content }}</p>
+            <footer class="blockquote-footer">by {{ post.author.username }}</footer>
+        </blockquote>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

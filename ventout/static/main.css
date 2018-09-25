@@ -74,3 +74,17 @@
 .post-content{
     font-size: 20px;
 }
+.update-delete-btn{
+    display: inline-block;
+    position: relative;
+    left: 57.5%;
+}
+#icons{
+    display: flex;
+    justify-content: center;
+}
+#icons img{
+    height: 50px;
+    width: 50px;
+    margin: 25px;
+}
