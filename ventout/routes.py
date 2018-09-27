@@ -149,3 +149,4 @@ def downloads(content):
     download_it.delay(content)
     return redirect(url_for('home'))
     # return redirect(url_for("static",filename="blog.txt"))
+
