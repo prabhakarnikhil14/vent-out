@@ -4,6 +4,7 @@ from ventout.forms import RegistrationForm, LoginForm, PostForm
 from flask import Request
 from flask_login import login_user, current_user, logout_user, login_required
 from ventout import app, db, bcrypt, es
+from ventout.download import download_it
 
 
 @app.route("/")
@@ -141,4 +142,15 @@ def delete_post(post_id):
     db.session.commit()
     es.delete(index='post', id=post.id, ignore=[400, 404])
     flash("Post is successfully deleted", 'success')
+    return redirect(url_for('home'))
+
+
+@app.route("/download/<content>", methods=['GET', 'POST'])
+def downloads(content):
+    flash(content, 'success')
+    print("I'm running in route first")
+    something = download_it.delay(content)
+    result = something.collect()
+    print("I'm running in route second")
+    flash(result, 'success')
     return redirect(url_for('home'))

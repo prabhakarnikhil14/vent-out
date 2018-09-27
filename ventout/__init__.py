@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from elasticsearch import Elasticsearch
-from celery import Celery
 import os
 
 app = Flask(__name__)
@@ -18,10 +17,5 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 es = Elasticsearch('http://127.0.0.1:9200')
-
-downloader = Celery('vent-out',
-             broker='amqp://',
-             backend='amqp://',
-             include=['vent-out.download'])
 
 from ventout import routes
