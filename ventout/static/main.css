@@ -102,3 +102,13 @@
     width: 100%;
     margin: 25px 0;
 }
+.down-icon{
+    float: right;
+}
+
+.download-button{
+    border: none;
+    float: right;
+    background-color: transparent;
+    font-size: 14px;
+}

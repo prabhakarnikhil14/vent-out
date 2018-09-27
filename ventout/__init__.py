@@ -3,10 +3,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from elasticsearch import Elasticsearch
+from celery import Celery
 import os
 
 app = Flask(__name__)
 
+app.config['CELERY_BROKER_URL'] = 'amqp://'
+app.config['CELERY_RESULT_BACKEND'] = 'amqp://'
+
+celery_down = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery_down.conf.update(app.config)
 
 app.config['SECRET_KEY'] = '04f75668f033b427c20fba935b2f831c'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
