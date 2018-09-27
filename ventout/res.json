@@ -1,0 +1,24 @@
+{
+    'took': 10,
+    'timed_out': False,
+    '_shards': {'total': 5, 'successful': 5, 'failed': 0}, 
+    'hits': {'total': 5, 'max_score': 0.6115718, 
+        'hits': [
+            {'_index': 'post', '_type': 'post', '_id': 'AWYV_KkBjESFEhejJx3i', '_score': 0.6115718, '_source': {'content': 'nikhil post content'
+                }
+            },
+            {'_index': 'post', '_type': 'post', '_id': 'AWYV_NuEjESFEhejJx3j', '_score': 0.6115718, '_source': {'content': 'nikhil post content'
+                }
+            },
+            {'_index': 'post', '_type': 'post', '_id': 'AWYV_lJKjESFEhejJx3n', '_score': 0.6115718, '_source': {'content': 'nikhil post content'
+                }
+            },
+            {'_index': 'post', '_type': 'post', '_id': 'AWYV_bAyjESFEhejJx3l', '_score': 0.5, '_source': {'content': 'nikhil post content'
+                }
+            },
+            {'_index': 'post', '_type': 'post', '_id': 'AWYV_xfQjESFEhejJx3p', '_score': 0.5, '_source': {'content': 'nikhil post content'
+                }
+            }
+        ]
+    }
+}

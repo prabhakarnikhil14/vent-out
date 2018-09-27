@@ -16,15 +16,25 @@
     margin-top: 35px;
 }
 
-.col-md-3 {
+.my-asides {
     margin-top: 35px;
     height: 250px;
+    display: inline-block;
     background-color: blanchedalmond;
     padding: 30px;
     line-height: 1.6;
 }
 
+
 .content-section button {
+    width: 100%;
+    padding: 10px 5px;
+    background-color: #343a40;
+    color: white;   
+    border: none;
+}
+
+.search-button{
     width: 100%;
     padding: 10px 5px;
     background-color: #343a40;
@@ -87,4 +97,8 @@
     height: 50px;
     width: 50px;
     margin: 25px;
+}
+.inside-aside{
+    width: 100%;
+    margin: 25px 0;
 }

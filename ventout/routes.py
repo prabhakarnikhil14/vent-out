@@ -3,13 +3,31 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from ventout.forms import RegistrationForm, LoginForm, PostForm
 from flask import Request
 from flask_login import login_user, current_user, logout_user, login_required
-from ventout import app, db, bcrypt
+from ventout import app, db, bcrypt, es
 
 
 @app.route("/")
 @app.route("/home")
 def home():
     my_posts = Post.query.all()
+
+    submit = request.args.get('btn')
+    q = request.args.get('input')
+
+    if submit == 'search':
+        my_posts = []
+        result = es.search(index='post', doc_type='post', body={
+                           'query': {'match': {'content': q}}})
+        if result:
+            for results in result['hits']['hits']:
+                id = results['_id']
+                post = Post.query.get(id)
+                if post != None:
+                    my_posts.append(post)
+        if len(my_posts) == 0:
+            flash("Search Returned Nothing", "info")
+        return render_template('home.html', posts=my_posts)
+
     return render_template('home.html', posts=my_posts)
 
 
@@ -78,6 +96,8 @@ def new_post():
                     content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
+        es.index(index='post', doc_type='post', id=post.id,
+                 body={'content': post.content})
         flash('Your Post is Vented', 'success')
         return redirect(url_for('home'))
     return render_template('create_post.html', title='New Post', form=form, legend="Vent it Out")
@@ -99,7 +119,10 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
+        es.delete(index='post', id=post.id, ignore=[400, 404])
         db.session.commit()
+        es.index(index='post', doc_type='post', id=post.id,
+                 body={'content': post.content})
         flash("Post is successfully updated", 'success')
         return redirect(url_for('post', post_id=post.id))
     elif request.method == 'GET':
@@ -116,5 +139,6 @@ def delete_post(post_id):
         abort(403)
     db.session.delete(post)
     db.session.commit()
+    es.delete(index='post', id=post.id, ignore=[400, 404])
     flash("Post is successfully deleted", 'success')
     return redirect(url_for('home'))
