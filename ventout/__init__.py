@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from elasticsearch import Elasticsearch
+from celery import Celery
 import os
 
 app = Flask(__name__)
@@ -17,9 +18,10 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 es = Elasticsearch('http://127.0.0.1:9200')
-# response = es.indices.create(index='post')
-# res = es.index(index='post', doc_type='post', body={'content': 'nikhil post content'})
-# print('++++++++++++++++++++++++++++++++++',res,'+++++++++++++++++++++++++++++++++++++++++++++')
-# print('--------------------------------------',es.search(index='post', doc_type='post', body={'query': {'match': {'content': 'nikhil'}}}),'----------------------------------------------------')
+
+downloader = Celery('vent-out',
+             broker='amqp://',
+             backend='amqp://',
+             include=['vent-out.download'])
 
 from ventout import routes
