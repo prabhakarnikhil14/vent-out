@@ -106,6 +106,7 @@ def new_post():
 @app.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)
+    download_it.delay(post.content)
     return render_template('post.html', title=post.title, post=post)
 
 
@@ -143,8 +144,3 @@ def delete_post(post_id):
     flash("Post is successfully deleted", 'success')
     return redirect(url_for('home'))
 
-
-@app.route("/download/<content>", methods=['GET', 'POST'])
-def downloads(content):
-    download_it.delay(content)
-    return redirect(url_for('home'))
