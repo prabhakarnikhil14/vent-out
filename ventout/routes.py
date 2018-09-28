@@ -3,7 +3,8 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from ventout.forms import RegistrationForm, LoginForm, PostForm
 from flask import Request
 from flask_login import login_user, current_user, logout_user, login_required
-from ventout import app, db, bcrypt
+from ventout import app, db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @app.route("/")
@@ -24,7 +25,7 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(
+        hashed_password = generate_password_hash(
             form.password.data).decode('utf-8')
         user = User(username=form.username.data,
                     email=form.email.data, password=hashed_password)
@@ -42,7 +43,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
+        if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             flash(f'Welcome {user.username}!', 'success')
